@@ -3,16 +3,18 @@ import type { Movie } from '../types/movie';
 
 interface FetchResponse{
     results: Movie[];
+    total_pages: number
 }
 
-export const movieSearch = async(submitValue: string) => {
+export const movieSearch = async(submitValue: string, page: number) => {
     const response = await axios.get<FetchResponse>(`https://api.themoviedb.org/3/search/movie`, {
         params: {
-            query: submitValue
+            query: submitValue,
+            page: page
         },
         headers: {
             Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`
         }
     });
-    return response.data.results
+    return response.data
 }
