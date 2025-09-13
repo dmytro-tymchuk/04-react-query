@@ -6,7 +6,7 @@ interface FetchResponse{
     total_pages: number
 }
 
-export const movieSearch = async(submitValue: string, page: number) => {
+export const movieSearch = async(submitValue: string, page: number): Promise<FetchResponse> => {
     const response = await axios.get<FetchResponse>(`https://api.themoviedb.org/3/search/movie`, {
         params: {
             query: submitValue,
